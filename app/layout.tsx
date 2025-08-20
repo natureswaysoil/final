@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { CartProvider } from '@/components/cart-context'
 import { CartSidebar } from '@/components/cart-sidebar'
 import { Providers } from '@/components/providers'
+import { AIChat } from '@/components/ai-chat'
 
 export const metadata = {
   title: {
@@ -57,6 +58,7 @@ export default function RootLayout({
                 <Footer />
               </div>
               <CartSidebar />
+              <AIChat />
               <Toaster />
             </CartProvider>
           </ThemeProvider>

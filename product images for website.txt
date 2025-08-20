@@ -1,0 +1,12 @@
+Product Image URLs for Website (Mapped by CSV Order):
+
+1. Liquid Kelp Fertilizer - 1 Gallon: /images/products/1 gallon kelp front.jpg
+2. Liquid Bone Meal - 32 oz: /images/products/32 ounce liquid bone meal front.jpg  
+3. Humic Acid Concentrate - 32 oz: /images/products/humic 32 ounce front.jpg
+4. Seaweed Extract - 2.5 Gallon: /images/products/seaweed front.jpg
+5. Liquid Biochar Amendment - 1 Gallon: /images/products/liquid biochar 1 gallon front.jpg
+6. Hydroponic Fertilizer - 32 oz: /images/products/hydroponic-fertilizer-32oz.jpg
+7. Organic Compost Tea - 1 Gallon: /images/products/dog 1 gallon front.jpg
+8. Wood Compost Blend - 2 Gallon: /images/products/wood compost frony.jpg
+9. Orchid Potting Mix - Premium Blend: /images/products/orchid-potting-mix.jpg
+10. All-Purpose Plant Food - 32 oz: /images/products/liquid kelp 32 front.jpg
