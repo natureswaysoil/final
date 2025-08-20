@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma } from '@/lib/db'
+import { SupabaseService } from '@/lib/supabase'
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
     // For authenticated users, use their ID, otherwise null for guest orders
     const finalUserId = session?.user?.id || userId || null
 
-    // Create the order
+    // Create the order in Prisma (existing system)
     const order = await prisma.order.create({
       data: {
         userId: finalUserId,
@@ -95,6 +96,64 @@ export async function POST(request: NextRequest) {
         }
       }
     })
+
+    // Also create customer and order in Supabase (new system)
+    try {
+      // Create or get customer in Supabase
+      let customer = null
+      try {
+        customer = await SupabaseService.getCustomerByEmail(shippingInfo.email)
+      } catch (error) {
+        // Customer doesn't exist, create new one
+        customer = await SupabaseService.createCustomer({
+          email: shippingInfo.email,
+          name: `${shippingInfo.firstName} ${shippingInfo.lastName}`,
+          phone: shippingInfo.phone || undefined
+        })
+      }
+
+      // Create order in Supabase
+      const supabaseOrderData = {
+        customer_id: customer.id,
+        status: (paymentInfo?.status === 'COMPLETED' ? 'processing' : 'pending') as 'pending' | 'processing',
+        total_amount: total,
+        currency: 'USD',
+        shipping_address: {
+          firstName: shippingInfo.firstName,
+          lastName: shippingInfo.lastName,
+          address: shippingInfo.address,
+          apartment: shippingInfo.apartment,
+          city: shippingInfo.city,
+          state: shippingInfo.state,
+          zipCode: shippingInfo.zipCode,
+          phone: shippingInfo.phone,
+          email: shippingInfo.email
+        },
+        billing_address: {
+          firstName: billingInfo.firstName,
+          lastName: billingInfo.lastName,
+          address: billingInfo.address,
+          apartment: billingInfo.apartment,
+          city: billingInfo.city,
+          state: billingInfo.state,
+          zipCode: billingInfo.zipCode,
+          phone: billingInfo.phone,
+          email: billingInfo.email
+        },
+        items: items.map((item: any) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+          price: item.price,
+          name: item.name || 'Unknown Product'
+        })),
+        payment_intent_id: paymentInfo?.paymentId || undefined
+      }
+
+      await SupabaseService.createOrder(supabaseOrderData)
+    } catch (supabaseError) {
+      console.error('Supabase order creation failed:', supabaseError)
+      // Don't fail the entire request if Supabase fails, just log the error
+    }
 
     // Send confirmation email (implement email service)
     // await sendOrderConfirmationEmail(order)
