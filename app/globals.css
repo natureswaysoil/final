@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    /* Nature-inspired color palette - earth tones, greens, browns */
+    --background: 47 20% 97%; /* Cream/off-white background */
+    --foreground: 25 35% 15%; /* Dark brown text */
+
+    --card: 47 25% 95%; /* Light cream for cards */
+    --card-foreground: 25 35% 15%; /* Dark brown */
+ 
+    --popover: 47 25% 95%;
+    --popover-foreground: 25 35% 15%;
+ 
+    --primary: 135 45% 35%; /* Forest green primary */
+    --primary-foreground: 47 20% 97%;
+ 
+    --secondary: 95 30% 85%; /* Light sage green */
+    --secondary-foreground: 25 35% 15%;
+ 
+    --muted: 95 15% 88%; /* Very light green-gray */
+    --muted-foreground: 25 20% 45%; /* Medium brown */
+ 
+    --accent: 40 35% 75%; /* Warm earth tone accent */
+    --accent-foreground: 25 35% 15%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 47 20% 97%;
+
+    --border: 95 20% 85%; /* Light green-gray border */
+    --input: 95 20% 90%; /* Input background */
+    --ring: 135 45% 35%; /* Forest green focus ring */
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    /* Dark mode with nature-inspired colors */
+    --background: 25 35% 8%; /* Dark brown background */
+    --foreground: 47 20% 95%; /* Light cream text */
+ 
+    --card: 25 30% 12%; /* Darker brown for cards */
+    --card-foreground: 47 20% 95%;
+ 
+    --popover: 25 30% 12%;
+    --popover-foreground: 47 20% 95%;
+ 
+    --primary: 135 40% 45%; /* Lighter forest green for dark mode */
+    --primary-foreground: 25 35% 8%;
+ 
+    --secondary: 95 20% 20%; /* Dark sage green */
+    --secondary-foreground: 47 20% 95%;
+ 
+    --muted: 25 25% 18%; /* Dark brown-gray */
+    --muted-foreground: 95 15% 65%; /* Light sage */
+ 
+    --accent: 40 25% 25%; /* Dark earth tone accent */
+    --accent-foreground: 47 20% 95%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 47 20% 95%;
+ 
+    --border: 25 25% 18%; /* Dark border */
+    --input: 25 25% 15%; /* Dark input background */
+    --ring: 135 40% 45%; /* Forest green focus ring */
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
