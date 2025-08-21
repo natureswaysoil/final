@@ -1,3 +1,5 @@
+
+
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/pages/index.tsx b/pages/index.tsx
 index b5f56c1efe62c8055a76f202616f07750d246a50..3a793f93038e9dff4d79f63057bc343aeeb0ae17 100644
