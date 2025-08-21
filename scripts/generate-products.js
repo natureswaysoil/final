@@ -1,3 +1,4 @@
+
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/scripts/generate-products.js b/scripts/generate-products.js
 index f9f53bb2f384f68b49b8a80ff1a3ce0cd03321a0..ba0ca3a5fd94f25079bf77cf79b552c6ac4cafec 100644
