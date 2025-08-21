@@ -1,8 +1,8 @@
-
 export const dynamic = "force-dynamic"
 
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
+import type { Product } from '@/lib/types'
 
 export async function GET(request: NextRequest) {
   try {
@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
     })
 
     // Convert Decimal to number for JSON response
-    const formattedProducts = products.map(product => ({
+    const formattedProducts = products.map((product: Product) => ({
       ...product,
       price: Number(product.price),
       compareAtPrice: product.compareAtPrice ? Number(product.compareAtPrice) : undefined
